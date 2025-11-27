@@ -1,0 +1,147 @@
+# Habilitar RewriteEngine
+RewriteEngine On
+
+# Definir base (ajustar conforme necessário)
+# Se seu projeto está em: http://localhost/ecommerce-mvc/
+# Use: RewriteBase /ecommerce-mvc/
+RewriteBase /ecommerce-mvc/
+
+# Redirecionar para index.php se não for arquivo ou diretório
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+# Proteger arquivos sensíveis
+<FilesMatch "(^#.*#|\.(bak|conf|dist|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$">
+    Order allow,deny
+    Deny from all
+    Satisfy All
+</FilesMatch>
+
+# Proteger diretórios
+Options -Indexes
+
+# Habilitar compressão GZIP
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Cache de arquivos estáticos
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# Forçar UTF-8
+AddDefaultCharset UTF-8
+
+# Prevenir acesso direto a arquivos PHP sensíveis
+<FilesMatch "^(config|Database)\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+```
+
+---
+
+# 📁 ESTRUTURA FINAL DE PASTAS
+
+Certifique-se que sua estrutura está assim:
+```
+ecommerce-mvc/
+│
+├── config/
+│   ├── Database.php
+│   └── config.php
+│
+├── models/
+│   ├── Product.php
+│   ├── Category.php
+│   ├── Customer.php
+│   ├── Order.php
+│   └── User.php
+│
+├── controllers/
+│   ├── ProductController.php
+│   ├── CategoryController.php
+│   ├── CustomerController.php
+│   ├── OrderController.php
+│   ├── AuthController.php
+│   ├── DashboardController.php
+│   ├── StoreController.php
+│   └── CartController.php
+│
+├── views/
+│   ├── layouts/
+│   │   ├── header.php
+│   │   ├── footer.php
+│   │   ├── admin-header.php
+│   │   ├── admin-sidebar.php
+│   │   └── admin-footer.php
+│   │
+│   ├── admin/
+│   │   ├── login.php
+│   │   ├── dashboard.php
+│   │   ├── products/
+│   │   │   ├── index.php
+│   │   │   ├── create.php
+│   │   │   └── edit.php
+│   │   ├── categories/
+│   │   │   ├── index.php
+│   │   │   ├── create.php
+│   │   │   └── edit.php
+│   │   ├── orders/
+│   │   │   ├── index.php
+│   │   │   └── show.php
+│   │   └── customers/
+│   │       └── index.php
+│   │
+│   ├── store/
+│   │   ├── home.php
+│   │   ├── product-detail.php
+│   │   ├── category.php
+│   │   ├── search.php
+│   │   ├── cart.php
+│   │   ├── checkout.php
+│   │   ├── order-success.php
+│   │   └── my-orders.php
+│   │
+│   └── auth/
+│       ├── login.php
+│       └── register.php
+│
+├── public/
+│   ├── css/
+│   │   ├── style.css
+│   │   └── admin.css
+│   ├── js/
+│   │   ├── main.js
+│   │   └── admin.js
+│   └── images/
+│       └── products/
+│
+├── database/
+│   ├── schema.sql
+│   ├── triggers.sql
+│   ├── procedures.sql
+│   ├── functions.sql
+│   └── seed.sql
+│
+├── .htaccess
+└── index.php
+```
+
+---
+
+# 🚀 COMO RODAR O PROJETO
+
+## Passo 1: Configurar o Projeto
+
+1. **Coloque a pasta do projeto no htdocs (XAMPP) ou www (WAMP)**
+```
+   C:/xampp/htdocs/ecommerce-mvc/

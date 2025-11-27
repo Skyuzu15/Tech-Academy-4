@@ -4,7 +4,7 @@ require_once 'config/config.php';
 
 // Pegar a URL
 $request = $_SERVER['REQUEST_URI'];
-$base_path = '/ecommerce-mvc/'; // Ajustar conforme seu caminho
+$base_path = '/ecommerce-mvc/'; // ⚠️ AJUSTAR CONFORME SEU CAMINHO
 $request = str_replace($base_path, '', $request);
 $request = strtok($request, '?'); // Remover query string
 
@@ -12,8 +12,7 @@ $request = strtok($request, '?'); // Remover query string
 $request = rtrim($request, '/');
 
 // Roteamento
-switch($request) {
-
+switch ($request) {
     // ROTAS DA LOJA (FRONTEND)
     case '':
     case 'home':
@@ -263,8 +262,62 @@ switch($request) {
     // 404 - PÁGINA NÃO ENCONTRADA
     default:
         http_response_code(404);
-        echo "<h1>404 - Página não encontrada</h1>";
-        echo "<p>A página que você procura não existe.</p>";
-        echo "<a href='" . BASE_URL . "'>Voltar para home</a>";
-        break;
+        echo "<!DOCTYPE html>
+        <html lang='pt-BR'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>404 - Página não encontrada</title>
+            <style>
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 100vh;
+                    margin: 0;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    text-align: center;
+                }
+                .container {
+                    padding: 40px;
+                }
+                h1 {
+                    font-size: 6rem;
+                    margin: 0;
+                }
+                h2 {
+                    font-size: 2rem;
+                    margin: 20px 0;
+                }
+                p {
+                    font-size: 1.2rem;
+                    margin-bottom: 30px;
+                }
+                a {
+                    display: inline-block;
+                    padding: 15px 30px;
+                    background: white;
+                    color: #667eea;
+                    text-decoration: none;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    transition: transform 0.3s;
+                    }
+                a:hover {
+                    transform: translateY(-3px);
+                }
+            </style>
+        </head>
+        <body>
+            <div class='container'>
+                <h1>404</h1>
+                <h2>Página não encontrada</h2>
+                <p>A página que você procura não existe.</p>
+                <a href='" . BASE_URL . "'>Voltar para Home</a>
+            </div>
+        </body>
+        </html>";
+    break;
 }
