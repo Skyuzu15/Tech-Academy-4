@@ -145,3 +145,39 @@ ecommerce-mvc/
 1. **Coloque a pasta do projeto no htdocs (XAMPP) ou www (WAMP)**
 ```
    C:/xampp/htdocs/ecommerce-mvc/
+
+2. **Editar o arquivo config/config.php**
+
+   define('BASE_URL', 'http://localhost/ecommerce-mvc/');
+
+3. **Editar o arquivo index.php (linha 6)**
+
+   $base_path = '/ecommerce-mvc/';
+
+   RewriteBase /ecommerce-mvc/
+```
+
+## Passo 2: Criar o Banco de Dados
+
+1. Acesse: `http://localhost/phpmyadmin`
+2. Execute os scripts SQL na ordem:
+   - `schema.sql`
+   - `triggers.sql`
+   - `procedures.sql`
+   - `functions.sql`
+   - `seed.sql`
+
+## Passo 3: Testar o Sistema
+
+### **LOJA (Frontend):**
+```
+http://localhost/ecommerce-mvc/
+```
+
+**Credenciais Cliente:**
+- Email: `joao@email.com`
+- Senha: `123456`
+
+### **ADMIN (Backend):**
+```
+http://localhost/ecommerce-mvc/admin/login
